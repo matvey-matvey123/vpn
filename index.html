@@ -1,142 +1,16 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VPN Subscription</title>
-    <style>
-        body {
-            background: #f5f5f5;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            text-align: center;
-        }
-        .status {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 400px;
-            margin: 20px auto;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .used { color: #e53e3e; font-weight: bold; }
-        .left { color: #38a169; font-weight: bold; }
-        .limit { color: #3182ce; font-weight: bold; }
-        .bar {
-            width: 100%;
-            height: 20px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-        .bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #38a169, #e53e3e);
-            transition: width 0.5s;
-            border-radius: 10px;
-        }
-        pre {
-            text-align: left;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            max-width: 700px;
-            margin: 0 auto;
-            overflow-x: auto;
-            font-size: 13px;
-            line-height: 1.8;
-        }
-        button {
-            background: #3182ce;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            margin: 5px;
-        }
-        button:hover { background: #2c5282; }
-        .reset-btn { background: #e53e3e; }
-        .reset-btn:hover { background: #c53030; }
-    </style>
-</head>
-<body>
-    <h1>🔒 VPN Подписка</h1>
-    <div class="status" id="status">Загрузка...</div>
-    <div class="bar"><div class="bar-fill" id="barFill" style="width:0%"></div></div>
-    <button onclick="getLinks()">🔄 Обновить</button>
-    <button class="reset-btn" onclick="resetTraffic()">♻️ Сбросить трафик</button>
-    <br><br>
-    <pre id="links"></pre>
-
-    <script>
-        const LIMIT_GB = 100;
-        const USER_KEY = 'vpn_user_traffic_bytes';
-
-        const ALL_SERVERS = [
-            "vless://e7b178da-65e8-45ad-8550-de40eb0a7835@162.159.22.144:80?type=ws&security=none&path=%2F&host=sahanwickramasinghevip.shop&encryption=none#🇨🇦 Канада-1",
-            "vless://e7b178da-65e8-45ad-8550-de40eb0a7835@172.67.170.226:80?type=ws&security=none&path=%2F&host=sahanwickramasinghevip.shop&encryption=none#🇨🇦 Канада-2",
-            "vless://7b102311-43fd-4e8f-877e-8090623c101d@104.17.49.88:2053?type=ws&security=tls&path=%2F&host=vp27.cc.cd&encryption=none&sni=vp27.cc.cd&alpn=&fp=chrome#🇨🇦 Канада-3",
-            "vless://f3d7ebbc-03a1-40f9-a911-ae8628d3927a@172.64.153.11:8880?type=ws&security=none&path=%2Fpyip%3DProxyIP.KR.CMLiussss.net&host=dawn-waterfall-6052.360-001.workers.dev&encryption=none#🇨🇦 Канада-4",
-            "vless://d8a7b463-dc98-474d-a87e-8781476aef32@172.66.132.196:8880?type=ws&security=none&path=%2Fpyip%3DProxyIP.KR.CMLiussss.net&host=ancient-tree-7dc9.336-5f9.workers.dev&encryption=none#🇨🇦 Канада-5",
-            "vless://663cf772-829c-4bc6-893d-b7d021d42f5b@104.17.176.159:2083?type=ws&security=tls&path=%2F&host=vp7.cc.cd&encryption=none&sni=vp7.cc.cd&alpn=&fp=chrome#🇨🇦 Канада-6",
-            "vless://663cf772-829c-4bc6-893d-b7d021d42f5b@8.35.211.178:2087?type=ws&security=tls&path=%2F&host=vp3.cc.cd&encryption=none&sni=vp3.cc.cd&alpn=&fp=chrome#🇺🇸 США-1",
-            "vless://663cf772-829c-4bc6-893d-b7d021d42f5b@8.35.211.63:2053?type=ws&security=tls&path=%2F&host=vp9.cc.cd&encryption=none&sni=vp9.cc.cd&alpn=&fp=firefox#🇺🇸 США-2",
-            "vless://663cf772-829c-4bc6-893d-b7d021d42f5b@8.39.125.46:2053?type=ws&security=tls&path=%2F&host=vp7.cc.cd&encryption=none&sni=vp7.cc.cd&alpn=&fp=chrome#🇺🇸 США-3",
-            "vless://11e57eeb-ffdf-4983-a9fa-ad352dea7253@154.193.55.183:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&sni=storage.yandex.net&alpn=&fp=firefox&pbk=EMS0wzISeSbEe4JABPD8EgDnyLXgDmrX4_lcfG6VVX4&sid=dbbe8dca27a92c35&spx=%2F#🇺🇸 США-5",
-            "vless://d5b25051-c06c-4af5-9cd6-b6000310177c@213.142.150.73:443?type=tcp&security=reality&encryption=none&flow=&sni=blog.api.www.cloudflare.com&alpn=&fp=chrome&pbk=-FkwzDH8lJExoLie681Fqrfrnm-Wj72TQdPyshWkO1c&sid=ce310cc046141015&spx=%2F#🇹🇷 Турция",
-            "vless://81d55675-8570-4b40-9a77-3125339a0f86@www.visa.com.sg:8880?type=ws&security=none&path=%2Fpyip%3DProxyIP.KR.CMLiussss.net&host=spring-sound-8d8e.36-9ff.workers.dev&encryption=none#🌍 Dynamic-24798",
-            "vless://e4514801-0d5a-42ba-869f-39bd605aef9e@13.37.254.201:22222?type=tcp&security=none&encryption=none#🇫🇷 Франция",
-            "vless://f4e91fac-25eb-4d26-a14c-c82c3778a0e4@43.250.175.174:8443?type=ws&security=tls&path=%2Fproxyip%3Dtw.william.us.ci&host=s5gydl.936.us.ci&encryption=none&sni=s5gydl.936.us.ci&alpn=&fp=chrome#🇯🇵 Япония",
-            "vless://0b9bcbc1-b289-4a64-86fa-a5b731b65384@93.152.205.216:444?type=grpc&security=reality&encryption=none&sni=web.max.ru&alpn=&fp=chrome&pbk=X-YL5VNtlMNIaBrwaHt3hJCeF_gMT9gPRDDlK1Qg7Tc&sid=8321461729abcdef&spx=%2F&serviceName=web.max.ru#🇧🇬 Болгария",
-            "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.219:8080#🇳🇱 Нидерланды",
-        ];
-
-        function getTraffic() {
-            return parseInt(localStorage.getItem(USER_KEY) || '0');
-        }
-
-        function setTraffic(bytes) {
-            localStorage.setItem(USER_KEY, bytes.toString());
-        }
-
-        function getLinks() {
-            const usedBytes = getTraffic();
-            const usedGB = (usedBytes / 1024 / 1024 / 1024).toFixed(2);
-            const leftGB = (LIMIT_GB - usedBytes / 1024 / 1024 / 1024).toFixed(2);
-            const percent = Math.min((usedBytes / 1024 / 1024 / 1024) / LIMIT_GB * 100, 100);
-
-            if (usedGB >= LIMIT_GB) {
-                document.getElementById('status').innerHTML = `
-                    <h2>❌ Лимит исчерпан</h2>
-                    <p>Использовано: <span class="used">${usedGB} ГБ</span> / <span class="limit">${LIMIT_GB} ГБ</span></p>
-                `;
-                document.getElementById('links').textContent = 'Лимит 100 ГБ исчерпан. Обратитесь к администратору.';
-                document.getElementById('barFill').style.width = '100%';
-                return;
-            }
-
-            document.getElementById('status').innerHTML = `
-                <h2>✅ Подписка активна</h2>
-                <p>Использовано: <span class="used">${usedGB} ГБ</span></p>
-                <p>Осталось: <span class="left">${leftGB} ГБ</span></p>
-                <p>Лимит: <span class="limit">${LIMIT_GB} ГБ</span></p>
-            `;
-            document.getElementById('links').textContent = ALL_SERVERS.join('\n');
-            document.getElementById('barFill').style.width = percent + '%';
-        }
-
-        function resetTraffic() {
-            if (confirm('Сбросить счётчик трафика?')) {
-                setTraffic(0);
-                getLinks();
-            }
-        }
-
-        // При загрузке страницы — показать ссылки
-        getLinks();
-    </script>
-</body>
-</html>
+vless://e7b178da-65e8-45ad-8550-de40eb0a7835@162.159.22.144:80?type=ws&security=none&path=%2F&host=sahanwickramasinghevip.shop&encryption=none#🇨🇦 Канада-1
+vless://e7b178da-65e8-45ad-8550-de40eb0a7835@172.67.170.226:80?type=ws&security=none&path=%2F&host=sahanwickramasinghevip.shop&encryption=none#🇨🇦 Канада-2
+vless://7b102311-43fd-4e8f-877e-8090623c101d@104.17.49.88:2053?type=ws&security=tls&path=%2F&host=vp27.cc.cd&encryption=none&sni=vp27.cc.cd&alpn=&fp=chrome#🇨🇦 Канада-3
+vless://f3d7ebbc-03a1-40f9-a911-ae8628d3927a@172.64.153.11:8880?type=ws&security=none&path=%2Fpyip%3DProxyIP.KR.CMLiussss.net&host=dawn-waterfall-6052.360-001.workers.dev&encryption=none#🇨🇦 Канада-4
+vless://d8a7b463-dc98-474d-a87e-8781476aef32@172.66.132.196:8880?type=ws&security=none&path=%2Fpyip%3DProxyIP.KR.CMLiussss.net&host=ancient-tree-7dc9.336-5f9.workers.dev&encryption=none#🇨🇦 Канада-5
+vless://663cf772-829c-4bc6-893d-b7d021d42f5b@104.17.176.159:2083?type=ws&security=tls&path=%2F&host=vp7.cc.cd&encryption=none&sni=vp7.cc.cd&alpn=&fp=chrome#🇨🇦 Канада-6
+vless://663cf772-829c-4bc6-893d-b7d021d42f5b@8.35.211.178:2087?type=ws&security=tls&path=%2F&host=vp3.cc.cd&encryption=none&sni=vp3.cc.cd&alpn=&fp=chrome#🇺🇸 США-1
+vless://663cf772-829c-4bc6-893d-b7d021d42f5b@8.35.211.63:2053?type=ws&security=tls&path=%2F&host=vp9.cc.cd&encryption=none&sni=vp9.cc.cd&alpn=&fp=firefox#🇺🇸 США-2
+vless://663cf772-829c-4bc6-893d-b7d021d42f5b@8.39.125.46:2053?type=ws&security=tls&path=%2F&host=vp7.cc.cd&encryption=none&sni=vp7.cc.cd&alpn=&fp=chrome#🇺🇸 США-3
+vless://11e57eeb-ffdf-4983-a9fa-ad352dea7253@154.193.55.183:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&sni=storage.yandex.net&alpn=&fp=firefox&pbk=EMS0wzISeSbEe4JABPD8EgDnyLXgDmrX4_lcfG6VVX4&sid=dbbe8dca27a92c35&spx=%2F#🇺🇸 США-5
+vless://d5b25051-c06c-4af5-9cd6-b6000310177c@213.142.150.73:443?type=tcp&security=reality&encryption=none&flow=&sni=blog.api.www.cloudflare.com&alpn=&fp=chrome&pbk=-FkwzDH8lJExoLie681Fqrfrnm-Wj72TQdPyshWkO1c&sid=ce310cc046141015&spx=%2F#🇹🇷 Турция
+vless://81d55675-8570-4b40-9a77-3125339a0f86@www.visa.com.sg:8880?type=ws&security=none&path=%2Fpyip%3DProxyIP.KR.CMLiussss.net&host=spring-sound-8d8e.36-9ff.workers.dev&encryption=none#🌍 Dynamic-24798
+vless://e4514801-0d5a-42ba-869f-39bd605aef9e@13.37.254.201:22222?type=tcp&security=none&encryption=none#🇫🇷 Франция
+vless://f4e91fac-25eb-4d26-a14c-c82c3778a0e4@43.250.175.174:8443?type=ws&security=tls&path=%2Fproxyip%3Dtw.william.us.ci&host=s5gydl.936.us.ci&encryption=none&sni=s5gydl.936.us.ci&alpn=&fp=chrome#🇯🇵 Япония
+vless://0b9bcbc1-b289-4a64-86fa-a5b731b65384@93.152.205.216:444?type=grpc&security=reality&encryption=none&sni=web.max.ru&alpn=&fp=chrome&pbk=X-YL5VNtlMNIaBrwaHt3hJCeF_gMT9gPRDDlK1Qg7Tc&sid=8321461729abcdef&spx=%2F&serviceName=web.max.ru#🇧🇬 Болгария
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.219:8080#🇳🇱 Нидерланды
