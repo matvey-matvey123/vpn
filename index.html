@@ -42,3 +42,171 @@ hysteria://pl02.auragg.org:443?auth=b05346a9-4d13-41a4-8d2a-6b7b64e73ffc&sni=pl0
 hysteria://sw02.auragg.org:8443?auth=b05346a9-4d13-41a4-8d2a-6b7b64e73ffc&sni=sw02.auragg.org&alpn=h3&insecure=0#❓ Неопознанный-18
 hysteria://sw02.auragg.org:8443?auth=b05346a9-4d13-41a4-8d2a-6b7b64e73ffc&sni=sw02.auragg.org&alpn=h3&insecure=0#❓ Неопознанный-19
 hysteria://de1-hy2.veilvpn.life:8433?auth=d2e3768f-cb23-4cfc-a884-dbd6813cb70b&sni=de1-hy2.veilvpn.life&alpn=h3&insecure=0#❓ Неопознанный-20
+{
+    "dns": {
+        "hosts": {
+            "domain:googleapis.cn": "googleapis.com"
+        },
+        "queryStrategy": "UseIP",
+        "servers": [
+            "1.1.1.1",
+            {
+                "address": "1.1.1.1",
+                "domains": [
+                ],
+                "port": 53
+            },
+            {
+                "address": "8.8.8.8",
+                "domains": [
+                ],
+                "port": 53
+            }
+        ]
+    },
+    "inbounds": [
+        {
+            "listen": "127.0.0.1",
+            "port": 10808,
+            "protocol": "socks",
+            "settings": {
+                "auth": "noauth",
+                "udp": true,
+                "userLevel": 8
+            },
+            "sniffing": {
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "enabled": true
+            },
+            "tag": "socks"
+        },
+        {
+            "listen": "127.0.0.1",
+            "port": 11111,
+            "protocol": "dokodemo-door",
+            "settings": {
+                "address": "127.0.0.1"
+            },
+            "tag": "metrics_in"
+        }
+    ],
+    "log": {
+        "loglevel": "warning"
+    },
+    "metrics": {
+        "tag": "metrics_out"
+    },
+    "outbounds": [
+        {
+            "mux": {
+                "concurrency": -1,
+                "enabled": false,
+                "xudpConcurrency": 8,
+                "xudpProxyUDP443": ""
+            },
+            "protocol": "hysteria",
+            "settings": {
+                "address": "de1-hy2.veilvpn.life",
+                "port": 8433,
+                "version": 2
+            },
+            "streamSettings": {
+                "finalmask": {
+                    "quicParams": {
+                        "congestion": "brutal"
+                    }
+                },
+                "hysteriaSettings": {
+                    "auth": "d2e3768f-cb23-4cfc-a884-dbd6813cb70b",
+                    "version": 2
+                },
+                "network": "hysteria",
+                "security": "tls",
+                "tlsSettings": {
+                    "allowInsecure": false,
+                    "alpn": [
+                        "h3"
+                    ],
+                    "serverName": "de1-hy2.veilvpn.life",
+                    "show": false
+                }
+            },
+            "tag": "proxy"
+        },
+        {
+            "protocol": "freedom",
+            "settings": {
+                "domainStrategy": "UseIP"
+            },
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "settings": {
+                "response": {
+                    "type": "http"
+                }
+            },
+            "tag": "block"
+        }
+    ],
+    "policy": {
+        "levels": {
+            "0": {
+                "statsUserDownlink": true,
+                "statsUserUplink": true
+            },
+            "8": {
+                "connIdle": 300,
+                "downlinkOnly": 1,
+                "handshake": 4,
+                "uplinkOnly": 1
+            }
+        },
+        "system": {
+            "statsInboundDownlink": true,
+            "statsInboundUplink": true,
+            "statsOutboundDownlink": true,
+            "statsOutboundUplink": true
+        }
+    },
+    "remarks": "By EbraSha 🌪️",
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "rules": [
+            {
+                "inboundTag": [
+                    "metrics_in"
+                ],
+                "outboundTag": "metrics_out"
+            },
+            {
+                "inboundTag": [
+                    "socks"
+                ],
+                "outboundTag": "proxy",
+                "port": "53"
+            },
+            {
+                "ip": [
+                    "1.1.1.1"
+                ],
+                "outboundTag": "proxy",
+                "port": "53"
+            },
+            {
+                "ip": [
+                    "8.8.8.8"
+                ],
+                "outboundTag": "direct",
+                "port": "53"
+            }
+        ]
+    },
+    "stats": {
+    }
+}
