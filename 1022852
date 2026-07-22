@@ -93,3 +93,32 @@ vless://7b81d175-d180-4ec8-bbc5-dfe80e8d3b68@144.31.129.42:443?type=grpc&securit
 
 # ========== КАЗАХСТАН ==========
 vless://b440a476-e65e-4f67-9993-b8c6d1308fd7@82.202.158.188:544?type=xhttp&security=reality&encryption=none&sni=www.amd.com&alpn=&fp=edge&pbk=xP3LIJ6-qQ51S89vFyW2PQeCjN921yVjN7pFDWKaswU&sid=1111&spx=&path=%2F#🇰🇿 Казахстан
+
+# ========== ЧИСТЫЕ АЙПИ ==========
+vless://566f8818-17fe-4ca9-8035-c9081ece6f68@176.123.165.127:57836?type=tcp&security=none&encryption=none#🇷🇺 чистый айпи 1
+vless://c8aecd59-4bf8-4008-b323-22565e104039@213.219.212.24:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&sni=eh.vk.ru&alpn=&fp=qq&pbk=AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk&sid=&spx=%2F#🇷🇺 чистый айпи 2
+vless://bdc00b0d-e5f5-4cde-8414-6eb7ab5af117@51.250.84.76:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&sni=ads.x5.ru&alpn=&fp=firefox&pbk=Py03aPnCma9Ip4xCvtBsK77NScUYphSw46RmdjFSvls&sid=a374f536afccddfe&spx=%2F#🇷🇺 чистый айпи 3
+vless://ec0503bb-a55e-455d-be57-409e1d7260a6@213.219.212.14:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&sni=eh.vk.ru&alpn=&fp=qq&pbk=AAZjVvbC7AwPKot_1ygO5VMpN7XYifCA7lG0RNR5sEk&sid=&spx=%2F#🇷🇺 чистый айпи 4
+vless://566f8818-17fe-4ca9-8035-c9081ece6f68@192.144.13.35:59242?type=tcp&security=none&encryption=none#🇷🇺 чистый айпи 5
+vless://566f8818-17fe-4ca9-8035-c9081ece6f68@176.123.165.127:56745?type=tcp&security=none&encryption=none#🇷🇺 чистый айпи 6
+vless://566f8818-17fe-4ca9-8035-c9081ece6f68@87.242.85.201:13561?type=tcp&security=none&encryption=none#🇷🇺 чистый айпи 7
+vless://566f8818-17fe-4ca9-8035-c9081ece6f68@87.242.85.201:35412?type=tcp&security=none&encryption=none#🇷🇺 чистый айпи 8
+vless://c28ee61d-0d43-4e69-8e6a-6397ed0ffc03@45.143.201.72:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&sni=tehno.store&alpn=&fp=firefox&pbk=SHDdd617KLHHb0qlQFOHepeHFl_Ch2i-K7o891uyo2M&sid=&spx=%2F#🇷🇺 чистый айпи 9
+vless://566f8818-17fe-4ca9-8035-c9081ece6f68@176.123.165.127:12672?type=tcp&security=none&encryption=none#🇷🇺 чистый айпи 10
+
+# ========== НЕОПОЗНАННЫЕ ==========
+ss://MjAyMi1ibGFrZTMtYWVzLTI1Ni1nY206dVhTZ1cybTRzYmZvWWNrVGJGaUduYVZuUDF5Z0lVTGkxMkxQUXZVWk5qTT06Rk5Xekk0T3dQVE5nQUZaVVVVRmp4MTltNVlmTG8zcU5YdDA3dENRM2xadz0=@65.109.219.124:18269#❓ Неопознанный-1
+ss://MjAyMi1ibGFrZTMtYWVzLTI1Ni1nY206dVhTZ1cybTRzYmZvWWNrVGJGaUduYVZuUDF5Z0lVTGkxMkxQUXZVWk5qTT06Rk5Xekk0T3dQVE5nQUZaVVVVRmp4MTltNVlmTG8zcU5YdDA3dENRM2xadz0=@65.109.219.124:18269#❓ Неопознанный-2
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp6ejBkSGpEZm9hU2FadVJGTEdILWhOZkJBTHNFSlVZRA==@194.164.92.198:1234#❓ Неопознанный-3
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp6ejBkSGpEZm9hU2FadVJGTEdILWhOZkJBTHNFSlVZRA==@194.164.92.198:1234#❓ Неопознанный-4
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpDSm1UQ0N4N0x0dWQ=@108.181.58.239:8388#❓ Неопознанный-5
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpGWHBEZjdXVjZsZkQ2bjlocHo3SEYy@157.22.240.141:57925#❓ Неопознанный-6
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXT2lyM2xYQmhNSERjTEZQUWRFWlhQdTM3X3BUUURDWGZt@103.111.114.71:28061#❓ Неопознанный-7
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXT2lyM2xYQmhNSERjTEZQUWRFWlhQdTM3X3BUUURDWGZt@103.111.114.82:28061#❓ Неопознанный-8
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXT2lyM2xYQmhNSERjTEZQUWRFWlhQdTM3X3BUUURDWGZt@103.111.114.82:28061#❓ Неопознанный-9
+vless://cbcf2255-6d66-4039-b7d6-c10d6ffc99e7@199.232.222.178:443?type=ws&security=tls&path=%2FTELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER&host=pan1.global.ssl.fastly.net&encryption=none&sni=ssl.fastly.com&alpn=&fp=chrome#❓ Неопознанный-21
+vless://155.103.69.195:48711?type=tcp&security=none&encryption=none&headerType=http&host=snapp.ir&path=%2F#❓ Неопознанный-22
+vless://cbcf2255-6d66-4039-b7d6-c10d6ffc99e7@199.232.222.178:443?type=ws&security=tls&path=%2FTELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER&host=pan1.global.ssl.fastly.net&encryption=none&sni=ssl.fastly.com&alpn=&fp=chrome#❓ Неопознанный-23
+vless://cbcf2255-6d66-4039-b7d6-c10d6ffc99e7@199.232.29.204:443?type=ws&security=tls&path=%2FTELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER,TELEGRAM_NUFiLTER&host=pan1.global.ssl.fastly.net&encryption=none&sni=ssl.fastly.com&alpn=&fp=firefox#❓ Неопознанный-24
+
+📦 ДОП. ПОДПИСКА: https://raw.githubusercontent.com/barry-far/V2ray-config/main/subscription.txt
