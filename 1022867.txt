@@ -2,7 +2,11 @@
 # profile-update-interval: 24
 # subscription-userinfo: upload=0; download=18874368; total=107374182400; expire=1752681600
 # support-url: https://t.me/programist_pro
-# profile-web-page-url: https://t.me/programist_pro
+# profile-web-page-url: Интернет без границ! Обход любых ограничений! 🚀
+
+Не забудь рассказать друзьям
+
+Нет подключения? Обнови подписку, нажав кнопку выше 🔄
 # ========== КАНАДА ==========
 vless://7b102311-43fd-4e8f-877e-8090623c101d@104.17.49.88:2053?type=ws&security=tls&path=%2F&host=vp27.cc.cd&encryption=none&sni=vp27.cc.cd&alpn=&fp=chrome#🇨🇦 Канада (подпишись t.me/programist_pro)
 
