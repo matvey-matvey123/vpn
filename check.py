@@ -4,18 +4,29 @@ import re
 import time
 import socket
 import ipaddress
-import random
 
 SUBSCRIPTIONS = [
     "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.1.txt",
     "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
 ]
 
-OUTPUT_FILE = "working.txt"
 MAX_PER_COUNTRY = 5
 MAX_OTHER = 10
 TIMEOUT = 2
-TOTAL_FILES = 10
+
+OUTPUT_FILES = [
+    "working.txt",
+    "1019410.txt",
+    "1033910.txt",
+    "1026810.txt",
+    "1080810.txt",
+    "1063010.txt",
+    "1042310.txt",
+    "1061910.txt",
+    "1077610.txt",
+    "1054310.txt",
+    "1016910.txt",
+]
 
 COUNTRY_RANGES = {
     "🇩🇪 Германия": ["5.9.0.0/16", "46.4.0.0/14", "78.46.0.0/15", "88.198.0.0/15", "116.202.0.0/15", "136.243.0.0/16", "144.76.0.0/16", "148.251.0.0/16", "159.69.0.0/16", "167.233.0.0/16", "168.119.0.0/16", "176.9.0.0/16", "188.40.0.0/16"],
@@ -102,46 +113,28 @@ def main():
     by_country_hida, other_hida = check_subscription(SUBSCRIPTIONS[0], max_check=300)
     by_country_mahdi, other_mahdi = check_subscription(SUBSCRIPTIONS[1], max_check=200)
     
-    # Объединяем серверы по странам из обоих подписок
     all_by_country = {c: [] for c in COUNTRY_RANGES}
     for c in COUNTRY_RANGES:
         all_by_country[c] = by_country_hida[c] + by_country_mahdi[c]
         all_by_country[c].sort(key=lambda x: x[0])
     
-    # Все остальные
     all_other = other_hida + other_mahdi
     all_other.sort(key=lambda x: x[0])
     best_other = all_other[:MAX_OTHER]
     
-    # working.txt - основной файл
-    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-        for country in ["🇩🇪 Германия", "🇺🇸 США", "🇷🇺 Россия", "🇳🇱 Нидерланды"]:
-            servers = all_by_country[country][:MAX_PER_COUNTRY]
-            for ping, link in servers:
-                f.write(f"{link}\n")
-        for ping, link in best_other:
-            f.write(f"{link}\n")
+    lines = []
+    for country in ["🇩🇪 Германия", "🇺🇸 США", "🇷🇺 Россия", "🇳🇱 Нидерланды"]:
+        servers = all_by_country[country][:MAX_PER_COUNTRY]
+        for ping, link in servers:
+            lines.append(link)
+    for ping, link in best_other:
+        lines.append(link)
     
-    # 10 случайных файлов: 10xxxxx.txt с серверами по странам
-    used_nums = set()
-    for i in range(TOTAL_FILES):
-        while True:
-            num = f"10{random.randint(10000, 99999)}"
-            if num not in used_nums:
-                used_nums.add(num)
-                break
-        
-        filename = f"{num}.txt"
-        with open(filename, 'w', encoding='utf-8') as f:                        
-            for country in ["🇩🇪 Германия", "🇺🇸 США", "🇷🇺 Россия", "🇳🇱 Нидерланды"]:
-                servers = all_by_country[country]
-                if len(servers) > MAX_PER_COUNTRY:
-                    # Берём случайные серверы, не те что в working.txt
-                    available = servers[MAX_PER_COUNTRY:]
-                    if available:
-                        chosen = random.sample(available, min(MAX_PER_COUNTRY, len(available)))
-                        for ping, link in chosen:
-                            f.write(f"{link}\n")
+    content = '\n'.join(lines)
+    
+    for fname in OUTPUT_FILES:
+        with open(fname, 'w', encoding='utf-8') as f:
+            f.write(content)
 
 if __name__ == '__main__':
     main()
