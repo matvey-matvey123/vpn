@@ -75,7 +75,6 @@ def main():
     
     # Сортируем по странам
     by_country = {c: [] for c in COUNTRY_KEYWORDS}
-    by_country["🌍 Другие"] = []
     
     for link in unique_links:
         host, port = extract_host_port(link)
@@ -89,25 +88,28 @@ def main():
         country = detect_country(link)
         if country:
             by_country[country].append((ping, link))
-        else:
-            by_country["🌍 Другие"].append((ping, link))
+            print(f"✅ {country} | {host}:{port} | {ping}ms")
     
     # Сохраняем результат
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         f.write(f"# Авто-проверка | Обновлено: {time.ctime()}\n\n")
         
-        for country, servers in by_country.items():
+        total = 0
+        for country in ["🇩🇪 Германия", "🇺🇸 США", "🇷🇺 Россия"]:
+            servers = by_country[country]
             servers.sort(key=lambda x: x[0])
             best = servers[:MAX_PER_COUNTRY]
-            if best:
-                f.write(f"# ========== {country} ({len(best)} шт) ==========\n")
-                for ping, link in best:
-                    f.write(f"{link}\n")
-                f.write("\n")
+            total += len(best)
+            f.write(f"# ========== {country} ({len(best)} шт) ==========\n")
+            for ping, link in best:
+                f.write(f"{link}\n")
+            f.write("\n")
         
-        total = sum(min(len(v), MAX_PER_COUNTRY) for v in by_country.values())
-        f.write(f"# Всего рабочих серверов: {total}\n")
+        f.write(f"# Всего: {total} серверов\n")
     
+    print(f"\n✅ Германия: {len(by_country['🇩🇪 Германия'])}")
+    print(f"✅ США: {len(by_country['🇺🇸 США'])}")
+    print(f"✅ Россия: {len(by_country['🇷🇺 Россия'])}")
     print(f"Готово! Сохранено в {OUTPUT_FILE}")
 
 if __name__ == '__main__':
