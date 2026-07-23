@@ -2,6 +2,9 @@
 # profile-update-interval: 24
 # subscription-userinfo: upload=0; download=0; total=107374182400; expire=1752681600
 # support-url: https://t.me/programist_pro
+
+# ========== ВНЕШНЯЯ ПОДПИСКА ==========
+https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.1.txt
 # ========== КАНАДА ==========
 vless://7b102311-43fd-4e8f-877e-8090623c101d@104.17.49.88:2053?type=ws&security=tls&path=%2F&host=vp27.cc.cd&encryption=none&sni=vp27.cc.cd&alpn=&fp=chrome#🇨🇦 Канада (подпишись t.me/programist_pro)
 vless://e7b178da-65e8-45ad-8550-de40eb0a7835@162.159.22.144:80?type=ws&security=none&path=%2F&host=sahanwickramasinghevip.shop&encryption=none#🇨🇦 Канада-1
