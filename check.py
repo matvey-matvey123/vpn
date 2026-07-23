@@ -4,6 +4,7 @@ import re
 import time
 import socket
 import ipaddress
+import random
 
 SUBSCRIPTIONS = [
     "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.1.txt",
@@ -11,6 +12,7 @@ SUBSCRIPTIONS = [
 ]
 
 OUTPUT_FILE = "working.txt"
+VPN_FILE = "vpn.txt"
 MAX_PER_COUNTRY = 5
 MAX_OTHER = 10
 TIMEOUT = 2
@@ -97,9 +99,25 @@ def check_subscription(sub_url, max_check=500):
     return by_country, other
 
 def main():
+    # Hidashimora
     by_country_hida, other_hida = check_subscription(SUBSCRIPTIONS[0], max_check=300)
-    _, other_mahdi = check_subscription(SUBSCRIPTIONS[1], max_check=200)
     
+    # Mahdibland
+    by_country_mahdi, other_mahdi = check_subscription(SUBSCRIPTIONS[1], max_check=200)
+    
+    # Все рабочие серверы (объединяем)
+    all_working = []
+    for c in COUNTRY_RANGES:
+        all_working.extend(by_country_hida[c])
+        all_working.extend(by_country_mahdi[c])
+    all_working.extend(other_hida)
+    all_working.extend(other_mahdi)
+    
+    # Перемешиваем и берём 30 случайных для vpn.txt
+    random.shuffle(all_working)
+    random_servers = all_working[:30]
+    
+    # working.txt - по странам + другие
     all_other = other_hida + other_mahdi
     all_other.sort(key=lambda x: x[0])
     best_other = all_other[:MAX_OTHER]
@@ -110,6 +128,12 @@ def main():
             for ping, link in servers:
                 f.write(f"{link}\n")
         for ping, link in best_other:
+            f.write(f"{link}\n")
+    
+    # vpn.txt - случайные рабочие серверы
+    with open(VPN_FILE, 'w', encoding='utf-8') as f:
+        f.write(f"# Случайные рабочие серверы | {time.ctime()}\n")
+        for ping, link in random_servers:
             f.write(f"{link}\n")
 
 if __name__ == '__main__':
