@@ -11,7 +11,7 @@ SUBSCRIPTIONS = [
     "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
 ]
 
-OUTPUT_FILE = "working.txt"
+OUTPUT_FILE = "working.txt", "1028210"
 MAX_PER_COUNTRY = 5
 MAX_OTHER = 10
 TIMEOUT = 2
@@ -132,7 +132,7 @@ def main():
                 break
         
         filename = f"{num}.txt"
-        with open(filename, 'w', encoding='utf-8') as f:
+        with open(filename, 'w', encoding='utf-8') as f:                        
             for country in ["🇩🇪 Германия", "🇺🇸 США", "🇷🇺 Россия", "🇳🇱 Нидерланды"]:
                 servers = all_by_country[country]
                 if len(servers) > MAX_PER_COUNTRY:
