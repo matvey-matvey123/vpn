@@ -1,8 +1,31 @@
-# Автоматически отобраны лучшие 5 серверов
-# Обновлено: Thu Jul 23 07:31:37 2026
+# Авто-проверка | Обновлено: Thu Jul 23 07:42:52 2026
 
+# ========== 🇩🇪 Германия (5 шт) ==========
+vless://934f2038-17f8-4ec5-9204-8381e19fc6e3@188.114.97.6:2053?encryption=none&type=ws&host=tight-bush-0bb4.bshxyyxhdjdggb.workers.dev&path=%2FeyJqdW5rIjoiVXFEMlhKZVY4dzNoTUtpZCIsInByb3RvY29sIjoidmwiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbXX0%3D%3Fed%3D2560&security=tls&sni=TIGHT-busH-0Bb4.BSHXYyXhDJdGGb.wOrkERS.DEV#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-22134
 vless://38ede46b-d237-4c76-9de1-a10738642adc@104.21.15.212:8880?encryption=none&type=ws&host=summer-hat-ba5c.430.workers.dev&path=/pyip%3DProxyIP.KR.CMLiussss.net&packetEncoding=xudp#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-24588
 vless://fba6d1fd-0dab-428d-ae71-0e64c73a6060@172.67.152.71:8880?type=ws&host=morning-wood-0e8a.28-63e.workers.dev&path=%2Fpyip%3DProxyIP.KR.CMLiussss.net#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-20372
-vless://b2c879ed-08a2-4a79-9c57-37c7db614e96@104.21.55.229:8880?encryption=none&security=none&type=ws&host=sweet-cake-1340.474-288.workers.dev&path=/pyip=ProxyIP.KR.CMLiussss.net#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-22707
-trojan://MITIVPN@188.114.97.6:443?path=/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN=win---usa&security=tls&alpn=http/1.1&insecure=0&host=8jidkdj282-2ododvb-28.App-ClouD.Ir&fp=chrome&type=ws&allowInsecure=0&sni=9bvv292-28bv3v-3j82vvb-jkk282-8bvc2.App-ClouD.Ir#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-24874
+vless://8dd8af16-cae0-4431-b04c-a637b4d7645b@104.16.107.139:8880?&security=none&type=ws&headerType=&host=wild-frog-c709.403-6ff.workers.dev&path=%2Fpyip%3DProxyIP.US.CMLiussss.net#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-19791
 vless://e7b178da-65e8-45ad-8550-de40eb0a7835@104.21.67.236:80?host=sahanwickramasinghevip.shop&path=%2F&type=ws#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-24470
+
+# ========== 🇺🇸 США (5 шт) ==========
+vless://663cf772-829c-4bc6-893d-b7d021d42f5b@8.35.211.169:8443?encryption=none&fp=firefox&host=vp6.cc.cd&path=/&security=tls&sni=vp6.cc.cd&type=ws#%5BOpenRay%5D%20%F0%9F%87%BA%F0%9F%87%B8%20US-21641
+vless://663cf772-829c-4bc6-893d-b7d021d42f5b@8.35.211.169:2083?encryption=none&fp=firefox&host=vp4.cc.cd&path=/&security=tls&sni=vp4.cc.cd&type=ws#%5BOpenRay%5D%20%F0%9F%87%BA%F0%9F%87%B8%20US-21981
+vless://cbcf2255-6d66-4039-b7d6-c10d6ffc99e7@199.232.22.39:443?path=%2FTELEGRAM_NUFiLTER%2CTELEGRAM_NUFiLTER%2CTELEGRAM_NUFiLTER%2CTELEGRAM_NUFiLTER%2CTELEGRAM_NUFiLTER%2CTELEGRAM_NUFiLTER%2CTELEGRAM_NUFiLTER%3Fed&security=tls&encryption=none&insecure=0&host=pan1.global.ssl.fastly.net&type=ws&allowInsecure=0&sni=ssl.fastly.com#%5BOpenRay%5D%20%F0%9F%87%BA%F0%9F%87%B8%20US-20974
+trojan://MITIVPN@188.114.97.6:443?path=/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN=win---usa&security=tls&alpn=http/1.1&insecure=0&host=8jidkdj282-2ododvb-28.App-ClouD.Ir&fp=chrome&type=ws&allowInsecure=0&sni=9bvv292-28bv3v-3j82vvb-jkk282-8bvc2.App-ClouD.Ir#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-24874
+vless://073d1d50-8478-47bf-a828-7a1b381931d5@www.speedtest.net:443?path=%2Fodiyfws&security=tls&encryption=none&insecure=0&host=octopusss.net&fp=chrome&type=ws&allowInsecure=0&sni=octopusss.net#%5BOpenRay%5D%20Dynamic-19351
+
+# ========== 🇷🇺 Россия (5 шт) ==========
+vless://ecad47b0-249e-4f6f-adff-e3c8f02b1897@89.105.219.139:443?encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc&security=reality&sid=43dcff53849b81e6&sni=nl.quattro-tech.ru&type=tcp#%5BOpenRay%5D%20%F0%9F%87%B3%F0%9F%87%B1%20NL-9509
+vless://7b81d175-d180-4ec8-bbc5-dfe80e8d3b68@144.31.0.100:443?type=tcp&security=reality&encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=CxMPFpwhcR9Ocp-Xy_1J08mo-atdHKUf58WLOy_XlgM&sid=5e3ab3ab228625&sni=vaultivo-hgooe.ru#%5BOpenRay%5D%20%F0%9F%87%B5%F0%9F%87%B1%20PL-1643
+vless://9501f3d6-483f-45c1-ab2c-33266520cd5c@81.85.78.78:2200?encryption=none&type=ws&security=none&path=%2Fv1&host=rzd.ru#%5BOpenRay%5D%20%F0%9F%87%B7%F0%9F%87%BA%20RU-30427
+vless://17228651-b902-0088-bdd6-ccf31d78542b@185.40.28.220:8443?encryption=none&fp=qq&pbk=10rVZPoOUP1TlQviIAsQ_jAROX0fRQxH0C92nq_zGQc&security=reality&sid=43dcff53849b81e6&sni=cloud.quattro-tech.ru&type=raw#%5BOpenRay%5D%20%F0%9F%87%B7%F0%9F%87%BA%20RU-31018
+vless://9b44bfb4-9d28-4870-9fc3-5154d6d462ff@217.177.74.196:4100?encryption=none&type=ws&security=none&path=/v1&host=live.ok.ru#%5BOpenRay%5D%20%F0%9F%87%B7%F0%9F%87%BA%20RU-30883
+
+# ========== 🌍 Другие (5 шт) ==========
+vless://4a1441b0-7bc8-4906-85cf-6b59c256b480@104.18.185.26:443?security=tls&sni=edt2.yfqh08811.ccwu.cc&type=ws&host=edt2.yfqh08811.ccwu.cc&path=/&fp=chrome#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-22845
+ss://d7982f29-66d1-4ca5-aa5d-ac6d577624a5@185.146.173.59:80?path=%2F%40Vpn_Mikey%D8%8C%40Vpn_Mikey&amp;security=none&amp;encryption=none&amp;host=Vpn-Mikey.%E6%AC%A2%E8%BF%8E%E8%AE%BF%E6%AC%A2%E8%BF%8E%E8%AE%BF%E9%97%AE%E4%B8%AD.website.&amp;type=ws#%5BOpenRay%5D%20%F0%9F%87%B8%F0%9F%87%AA%20SE-1894
+vless://7b102311-43fd-4e8f-877e-8090623c101d@104.com.tw:443?encryption=none&security=tls&sni=vp20.cc.cd&fp=chrome&insecure=0&allowInsecure=0&type=ws&host=vp20.cc.cd&path=%2F#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-24986
+vless://7b102311-43fd-4e8f-877e-8090623c101d@104.17.144.165:2096?security=tls&sni=vp23.cc.cd&type=ws&host=vp23.cc.cd&path=%2F&fp=chrome#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-24971
+vless://663cf772-829c-4bc6-893d-b7d021d42f5b@104.17.123.104:2053?encryption=none&security=tls&sni=vp9.cc.cd&fp=firefox&insecure=0&allowInsecure=0&type=ws&path=%2F#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-24927
+
+# Всего рабочих серверов: 20
