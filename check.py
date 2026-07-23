@@ -4,7 +4,6 @@ import re
 import time
 import socket
 import ipaddress
-import os
 
 SUBSCRIPTIONS = [
     "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.1.txt",
@@ -38,8 +37,7 @@ def fetch_links(url):
             if line and not line.startswith('#') and ('://' in line):
                 links.append(line)
         return links
-    except Exception as e:
-        print(f"Ошибка загрузки {url}: {e}")
+    except:
         return []
 
 def extract_host_port(link):
@@ -73,26 +71,19 @@ def check_tcp(host, port):
         return False, 9999, None
 
 def check_subscription(sub_url, max_check=500):
-    """Проверяет одну подписку и возвращает серверы по странам + другие"""
     links = fetch_links(sub_url)
-    unique_links = list(dict.fromkeys(links))[:max_check]  # Ограничиваем для скорости
-    print(f"Проверяю {len(unique_links)} ссылок из {sub_url}")
+    unique_links = list(dict.fromkeys(links))[:max_check]
     
     by_country = {c: [] for c in COUNTRY_RANGES}
     other = []
     
-    for i, link in enumerate(unique_links):
-        if i % 100 == 0:
-            print(f"  Прогресс: {i}/{len(unique_links)}")
-        
+    for link in unique_links:
         host, port = extract_host_port(link)
         if not host or not port:
             continue
-        
         ok, ping, ip = check_tcp(host, port)
         if not ok or not ip:
             continue
-        
         country = detect_country_by_ip(ip)
         if country:
             by_country[country].append((ping, link))
@@ -106,45 +97,20 @@ def check_subscription(sub_url, max_check=500):
     return by_country, other
 
 def main():
-    print("=" * 50)
-    print(f"Запуск: {time.ctime()}")
-    
-    # Проверяем Hidashimora
-    print("\n>>> Hidashimora (по странам)")
     by_country_hida, other_hida = check_subscription(SUBSCRIPTIONS[0], max_check=300)
-    
-    # Проверяем Mahdibland
-    print("\n>>> Mahdibland (любые 10)")
     _, other_mahdi = check_subscription(SUBSCRIPTIONS[1], max_check=200)
     
-    # Объединяем другие серверы
     all_other = other_hida + other_mahdi
     all_other.sort(key=lambda x: x[0])
     best_other = all_other[:MAX_OTHER]
     
-    # Сохраняем результат
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-        f.write(f"# 🤖 Авто-проверка | {time.ctime()}\n\n")
-        
         for country in ["🇩🇪 Германия", "🇺🇸 США", "🇷🇺 Россия", "🇳🇱 Нидерланды"]:
             servers = by_country_hida[country][:MAX_PER_COUNTRY]
-            f.write(f"# ========== {country} ({len(servers)} шт) ==========\n")
             for ping, link in servers:
                 f.write(f"{link}\n")
-            f.write("\n")
-        
-        f.write(f"# ========== 🌍 Другие рабочие ({len(best_other)} шт) ==========\n")
         for ping, link in best_other:
             f.write(f"{link}\n")
-        f.write("\n")
-        
-        total = sum(len(by_country_hida[c][:MAX_PER_COUNTRY]) for c in COUNTRY_RANGES) + len(best_other)
-        f.write(f"# Всего: {total} серверов\n")
-    
-    print("\nГотово!")
-    for c in COUNTRY_RANGES:
-        print(f"  {c}: {len(by_country_hida[c][:MAX_PER_COUNTRY])}")
-    print(f"  Другие: {len(best_other)}")
 
 if __name__ == '__main__':
     main()
