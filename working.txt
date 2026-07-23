@@ -1,0 +1,8 @@
+# Автоматически отобраны лучшие 5 серверов
+# Обновлено: Thu Jul 23 07:31:37 2026
+
+vless://38ede46b-d237-4c76-9de1-a10738642adc@104.21.15.212:8880?encryption=none&type=ws&host=summer-hat-ba5c.430.workers.dev&path=/pyip%3DProxyIP.KR.CMLiussss.net&packetEncoding=xudp#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-24588
+vless://fba6d1fd-0dab-428d-ae71-0e64c73a6060@172.67.152.71:8880?type=ws&host=morning-wood-0e8a.28-63e.workers.dev&path=%2Fpyip%3DProxyIP.KR.CMLiussss.net#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-20372
+vless://b2c879ed-08a2-4a79-9c57-37c7db614e96@104.21.55.229:8880?encryption=none&security=none&type=ws&host=sweet-cake-1340.474-288.workers.dev&path=/pyip=ProxyIP.KR.CMLiussss.net#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-22707
+trojan://MITIVPN@188.114.97.6:443?path=/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN=win---usa&security=tls&alpn=http/1.1&insecure=0&host=8jidkdj282-2ododvb-28.App-ClouD.Ir&fp=chrome&type=ws&allowInsecure=0&sni=9bvv292-28bv3v-3j82vvb-jkk282-8bvc2.App-ClouD.Ir#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-24874
+vless://e7b178da-65e8-45ad-8550-de40eb0a7835@104.21.67.236:80?host=sahanwickramasinghevip.shop&path=%2F&type=ws#%5BOpenRay%5D%20%F0%9F%87%A8%F0%9F%87%A6%20CA-24470
