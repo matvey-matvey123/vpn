@@ -11,7 +11,7 @@ SUBSCRIPTIONS = [
     "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
 ]
 
-OUTPUT_FILE = "working.txt", "1028210"
+OUTPUT_FILE = "working.txt"
 MAX_PER_COUNTRY = 5
 MAX_OTHER = 10
 TIMEOUT = 2
