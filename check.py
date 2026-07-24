@@ -7,27 +7,129 @@ import ipaddress
 import shutil
 
 SUBSCRIPTIONS = [
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.txt",
     "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.3.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.4.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.5.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.6.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.7.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.8.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.9.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.10.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.11.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.12.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.13.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.14.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.15.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.16.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.17.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.18.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.19.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.20.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.21.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.22.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.23.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.24.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.25.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.26.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/2.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/2.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/3.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/3.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/3.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/4.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/4.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/5.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/5.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/5.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/6.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/6.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/6.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/7.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/7.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/8.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/8.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/8.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/9.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/9.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/9.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/10.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/10.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/11.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/11.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/11.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/12.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/12.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/13.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/13.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/13.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/14.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/14.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/14.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/15.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/15.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/15.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/16.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/16.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/17.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/17.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/17.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/18.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/18.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/19.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/19.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/19.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/20.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/20.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/20.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/21.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/21.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/21.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/22.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/22.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/22.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/23.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/23.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/23.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/24.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/24.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/24.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/25.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/25.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/25.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/26.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/26.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/26.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/27.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/28.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/28.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/28.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/29.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/30.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/31.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/32.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/32.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/32.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/33.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/33.1.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/33.2.txt",
+    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/34.txt",
     "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
+    "https://matvey-matvey123.github.io/vpn/a",
+    "https://matvey-matvey123.github.io/vpn/b",
+    "https://matvey-matvey123.github.io/vpn/c",
+    "https://matvey-matvey123.github.io/vpn/d",
+    "https://raw.githubusercontent.com/EtoNeYaProject/etoneyaproject.github.io/refs/heads/main/2",
+    "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
 ]
 
 OUTPUT_FILE = "working.txt"
 MAX_PER_COUNTRY = 5
 MAX_OTHER = 10
 TIMEOUT = 2
-
-COPY_FILES = [
-    "1019410.txt",
-    "1033910.txt",
-    "1026810.txt",
-    "1080810.txt",
-    "1063010.txt",
-    "1042310.txt",
-    "1061910.txt",
-    "1077610.txt",
-    "1054310.txt",
-    "1016910.txt",
-]
 
 COUNTRY_RANGES = {
     "🇩🇪 Германия": ["5.9.0.0/16", "46.4.0.0/14", "78.46.0.0/15", "88.198.0.0/15", "116.202.0.0/15", "136.243.0.0/16", "144.76.0.0/16", "148.251.0.0/16", "159.69.0.0/16", "167.233.0.0/16", "168.119.0.0/16", "176.9.0.0/16", "188.40.0.0/16"],
@@ -77,7 +179,7 @@ def check_tcp(host, port):
     except:
         return False, 9999, None
 
-def check_sub(url, mx=500):
+def check_sub(url, mx=100):
     links = list(dict.fromkeys(fetch_links(url)))[:mx]
     bc = {c: [] for c in COUNTRY_RANGES}
     ot = []
@@ -99,21 +201,25 @@ def check_sub(url, mx=500):
     return bc, ot
 
 def main():
-    bh, oh = check_sub(SUBSCRIPTIONS[0], 300)
-    bm, om = check_sub(SUBSCRIPTIONS[1], 200)
-    abc = {c: sorted(bh[c] + bm[c]) for c in COUNTRY_RANGES}
-    bo = sorted(oh + om)[:MAX_OTHER]
+    all_bc = {c: [] for c in COUNTRY_RANGES}
+    all_ot = []
+    for sub in SUBSCRIPTIONS:
+        bc, ot = check_sub(sub, 100)
+        for c in COUNTRY_RANGES:
+            all_bc[c].extend(bc[c])
+        all_ot.extend(ot)
+    for c in COUNTRY_RANGES:
+        all_bc[c].sort()
+    bo = sorted(all_ot)[:MAX_OTHER]
     lines = []
     for c in ["🇩🇪 Германия", "🇺🇸 США", "🇷🇺 Россия", "🇳🇱 Нидерланды"]:
-        for _, l in abc[c][:MAX_PER_COUNTRY]:
+        for _, l in all_bc[c][:MAX_PER_COUNTRY]:
             lines.append(l)
     for _, l in bo:
         lines.append(l)
     content = '\n'.join(lines)
     with open(OUTPUT_FILE, 'w') as f:
         f.write(content)
-    for fn in COPY_FILES:
-        shutil.copy(OUTPUT_FILE, fn)
 
 if __name__ == '__main__':
     main()
