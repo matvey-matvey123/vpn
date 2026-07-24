@@ -3,7 +3,6 @@ import base64
 import re
 import time
 import socket
-import ipaddress
 
 SUBSCRIPTIONS = [
     "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.txt",
@@ -14,22 +13,12 @@ SUBSCRIPTIONS = [
     "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/25.txt",
     "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/30.txt",
     "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/34.txt",
-    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.13.txt",
     "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/2.1.txt",
-    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/5.1.txt",
     "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/8.txt",
-    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/11.txt",
-    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/16.1.txt",
-    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/20.1.txt",
-    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/24.txt",
-    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/28.txt",
-    "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/33.txt",
-    "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
-    "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt",
 ]
 
 OUTPUT_FILE = "working.txt"
-MAX_SERVERS = 30
+MAX_SERVERS = 20
 MAX_PING = 300
 TIMEOUT = 3
 
@@ -90,13 +79,8 @@ def main():
         all_links.extend(links)
     
     unique_links = list(dict.fromkeys(all_links))
-    print(f"Всего ссылок: {len(unique_links)}")
-    
-    # Фильтруем динамические
     static_links = [l for l in unique_links if not is_dynamic(l)]
-    print(f"Статических: {len(static_links)}")
     
-    # Проверяем пинг
     results = []
     for l in static_links:
         h, p = extract_host_port(l)
@@ -109,15 +93,9 @@ def main():
     results.sort()
     best = results[:MAX_SERVERS]
     
-    lines = []
-    for ping, l in best:
-        lines.append(l)
-    
-    content = '\n'.join(lines)
+    lines = [l for _, l in best]
     with open(OUTPUT_FILE, 'w') as f:
-        f.write(content)
-    
-    print(f"Сохранено: {len(best)} серверов (пинг < {MAX_PING}мс)")
+        f.write('\n'.join(lines))
 
 if __name__ == '__main__':
     main()
