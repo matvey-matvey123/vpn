@@ -18,29 +18,9 @@ SUBSCRIPTIONS = [
 ]
 
 OUTPUT_FILE = "working.txt"
-MAX_SERVERS = 20
+MAX_SERVERS = 40
 MAX_PING = 300
 TIMEOUT = 3
-
-DYNAMIC_KEYWORDS = [
-    "dynamic", "dyn", "ddns", "no-ip", "duckdns", "hopto", "zapto",
-    "sytes", "servehttp", "serveftp", "myftp", "myddns", "changeip",
-    "dnsdynamic", "dynamicdns", "dynip", "dynamic-ip",
-]
-
-def is_dynamic(link):
-    link_lower = link.lower()
-    for kw in DYNAMIC_KEYWORDS:
-        if kw in link_lower:
-            return True
-    host = re.search(r'@([^:?\s]+):', link)
-    if host:
-        h = host.group(1)
-        if not re.match(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$', h):
-            parts = h.split('.')
-            if len(parts) > 3:
-                return True
-    return False
 
 def fetch_links(url):
     try:
@@ -79,10 +59,9 @@ def main():
         all_links.extend(links)
     
     unique_links = list(dict.fromkeys(all_links))
-    static_links = [l for l in unique_links if not is_dynamic(l)]
     
     results = []
-    for l in static_links:
+    for l in unique_links:
         h, p = extract_host_port(l)
         if not h:
             continue
