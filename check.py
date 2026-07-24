@@ -4,18 +4,19 @@ import re
 import time
 import socket
 import ipaddress
+import shutil
 
 SUBSCRIPTIONS = [
     "https://raw.githubusercontent.com/Hidashimora/free-vpn-anti-rkn/main/configs/1.1.txt",
     "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_merge.txt",
 ]
 
+OUTPUT_FILE = "working.txt"
 MAX_PER_COUNTRY = 5
 MAX_OTHER = 10
 TIMEOUT = 2
 
-OUTPUT_FILES = [
-    "working.txt",
+COPY_FILES = [
     "1019410.txt",
     "1033910.txt",
     "1026810.txt",
@@ -44,28 +45,21 @@ def fetch_links(url):
             text = base64.b64decode(r.text).decode('utf-8', errors='ignore')
         except:
             text = r.text
-        links = []
-        for line in text.split('\n'):
-            line = line.strip()
-            if line and not line.startswith('#') and ('://' in line):
-                links.append(line)
-        return links
+        return [l.strip() for l in text.split('\n') if l.strip() and not l.startswith('#') and '://' in l]
     except:
         return []
 
 def extract_host_port(link):
-    match = re.search(r'@([^:?\s]+):(\d+)', link)
-    if match:
-        return match.group(1), int(match.group(2))
-    return None, None
+    m = re.search(r'@([^:?\s]+):(\d+)', link)
+    return (m.group(1), int(m.group(2))) if m else (None, None)
 
-def detect_country_by_ip(ip_str):
+def detect_country(ip_str):
     try:
         ip = ipaddress.ip_address(ip_str)
-        for country, ranges in COUNTRY_RANGES.items():
-            for cidr in ranges:
+        for c, r in COUNTRY_RANGES.items():
+            for cidr in r:
                 if ip in ipaddress.ip_network(cidr):
-                    return country
+                    return c
     except:
         pass
     return None
@@ -75,66 +69,51 @@ def check_tcp(host, port):
         ip = socket.gethostbyname(host)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(TIMEOUT)
-        start = time.time()
+        t = time.time()
         s.connect((ip, port))
-        ping = round((time.time() - start) * 1000)
+        p = round((time.time() - t) * 1000)
         s.close()
-        return True, ping, ip
+        return True, p, ip
     except:
         return False, 9999, None
 
-def check_subscription(sub_url, max_check=500):
-    links = fetch_links(sub_url)
-    unique_links = list(dict.fromkeys(links))[:max_check]
-    
-    by_country = {c: [] for c in COUNTRY_RANGES}
-    other = []
-    
-    for link in unique_links:
-        host, port = extract_host_port(link)
-        if not host or not port:
+def check_sub(url, mx=500):
+    links = list(dict.fromkeys(fetch_links(url)))[:mx]
+    bc = {c: [] for c in COUNTRY_RANGES}
+    ot = []
+    for l in links:
+        h, p = extract_host_port(l)
+        if not h:
             continue
-        ok, ping, ip = check_tcp(host, port)
-        if not ok or not ip:
+        ok, ping, ip = check_tcp(h, p)
+        if not ok:
             continue
-        country = detect_country_by_ip(ip)
-        if country:
-            by_country[country].append((ping, link))
+        c = detect_country(ip)
+        if c:
+            bc[c].append((ping, l))
         else:
-            other.append((ping, link))
-    
+            ot.append((ping, l))
     for c in COUNTRY_RANGES:
-        by_country[c].sort(key=lambda x: x[0])
-    other.sort(key=lambda x: x[0])
-    
-    return by_country, other
+        bc[c].sort()
+    ot.sort()
+    return bc, ot
 
 def main():
-    by_country_hida, other_hida = check_subscription(SUBSCRIPTIONS[0], max_check=300)
-    by_country_mahdi, other_mahdi = check_subscription(SUBSCRIPTIONS[1], max_check=200)
-    
-    all_by_country = {c: [] for c in COUNTRY_RANGES}
-    for c in COUNTRY_RANGES:
-        all_by_country[c] = by_country_hida[c] + by_country_mahdi[c]
-        all_by_country[c].sort(key=lambda x: x[0])
-    
-    all_other = other_hida + other_mahdi
-    all_other.sort(key=lambda x: x[0])
-    best_other = all_other[:MAX_OTHER]
-    
+    bh, oh = check_sub(SUBSCRIPTIONS[0], 300)
+    bm, om = check_sub(SUBSCRIPTIONS[1], 200)
+    abc = {c: sorted(bh[c] + bm[c]) for c in COUNTRY_RANGES}
+    bo = sorted(oh + om)[:MAX_OTHER]
     lines = []
-    for country in ["🇩🇪 Германия", "🇺🇸 США", "🇷🇺 Россия", "🇳🇱 Нидерланды"]:
-        servers = all_by_country[country][:MAX_PER_COUNTRY]
-        for ping, link in servers:
-            lines.append(link)
-    for ping, link in best_other:
-        lines.append(link)
-    
+    for c in ["🇩🇪 Германия", "🇺🇸 США", "🇷🇺 Россия", "🇳🇱 Нидерланды"]:
+        for _, l in abc[c][:MAX_PER_COUNTRY]:
+            lines.append(l)
+    for _, l in bo:
+        lines.append(l)
     content = '\n'.join(lines)
-    
-    for fname in OUTPUT_FILES:
-        with open(fname, 'w', encoding='utf-8') as f:
-            f.write(content)
+    with open(OUTPUT_FILE, 'w') as f:
+        f.write(content)
+    for fn in COPY_FILES:
+        shutil.copy(OUTPUT_FILE, fn)
 
 if __name__ == '__main__':
     main()
