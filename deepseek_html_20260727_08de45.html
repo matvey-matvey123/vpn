@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPN Bot</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 { font-size: 1.2rem; margin-bottom: 4px; }
+        .badge {
+            display: inline-block;
+            background: #22c55e;
+            color: #000;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .count {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #22c55e;
+            margin-bottom: 12px;
+        }
+        .logs {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 10px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            max-height: 250px;
+            overflow-y: auto;
+            text-align: left;
+        }
+        .log-line { padding: 3px 0; border-bottom: 1px solid #1e293b; }
+        .time { color: #6366f1; }
+        .ok { color: #22c55e; }
+        .err { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🤖 VPN Bot</h1>
+        <div class="badge" id="badge">⚡ Онлайн</div>
+        <div class="count" id="count"></div>
+        <div class="logs" id="logs"></div>
+    </div>
+
+    <script>
+        const TOKEN = "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";
+        const BOT = "8907038357:AAGSgNYn96USmTiLLL9EwwgpC4pmJshv_ek";
+        const REPO = "matvey-matvey123/vpn";
+        
+        let offset = 0;
+        const done = new Set();
+
+        function log(msg, type) {
+            const el = document.getElementById('logs');
+            const t = new Date().toLocaleTimeString();
+            el.innerHTML += `<div class="log-line"><span class="time">${t}</span> <span class="${type}">${msg}</span></div>`;
+            el.scrollTop = el.scrollHeight;
+            if (el.children.length > 100) el.removeChild(el.firstChild);
+        }
+
+        async function send(id, text) {
+            await fetch(`https://api.telegram.org/bot${BOT}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: id, text })
+            });
+        }
+
+        async function tick() {
+            try {
+                const r = await fetch(`https://api.telegram.org/bot${BOT}/getUpdates?offset=${offset + 1}&timeout=3`);
+                const d = await r.json();
+                
+                if (d.ok && d.result.length) {
+                    document.getElementById('badge').textContent = '⚡ Онлайн';
+                    document.getElementById('badge').style.background = '#22c55e';
+                    
+                    for (const u of d.result) {
+                        if (done.has(u.update_id)) continue;
+                        done.add(u.update_id);
+                        offset = u.update_id;
+                        
+                        const m = u.message;
+                        if (!m || !m.text) continue;
+                        
+                        const txt = m.text.toLowerCase().trim();
+                        const cid = m.chat.id;
+                        const name = m.chat.first_name || 'User';
+                        
+                        log(`📩 ${name}: "${m.text}"`);
+                        
+                        if (['обнови', 'update', '/update'].includes(txt)) {
+                            await send(cid, '🔄 Запускаю...');
+                            log('🔄 Запуск workflow...');
+                            
+                            const r2 = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/check-servers.yml/dispatches`, {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': `token ${TOKEN}`,
+                                    'Accept': 'application/vnd.github+json'
+                                },
+                                body: JSON.stringify({ ref: 'main' })
+                            });
+                            
+                            if (r2.status === 204) {
+                                log('✅ Workflow запущен', 'ok');
+                                await send(cid, '✅ Запущено! Жди 2 мин.');
+                                
+                                setTimeout(async () => {
+                                    const r3 = await fetch(`https://raw.githubusercontent.com/${REPO}/main/working.txt?t=${Date.now()}`);
+                                    if (r3.ok) {
+                                        const n = r3.text().split('\n').filter(l => l.includes('://')).length;
+                                        await send(cid, `✅ Готово! Серверов: ${n}`);
+                                        document.getElementById('count').textContent = `📡 ${n}`;
+                                        log(`✅ ${n} серверов`, 'ok');
+                                    }
+                                }, 90000);
+                            } else {
+                                await send(cid, '⚠️ Уже запущен');
+                                log('⚠️ Уже запущен', 'err');
+                            }
+                        } else if (['проверь', 'статус', 'status', '/status'].includes(txt)) {
+                            const r3 = await fetch(`https://raw.githubusercontent.com/${REPO}/main/working.txt?t=${Date.now()}`);
+                            if (r3.ok) {
+                                const n = r3.text().split('\n').filter(l => l.includes('://')).length;
+                                await send(cid, `📡 Серверов: ${n}`);
+                                document.getElementById('count').textContent = `📡 ${n}`;
+                                log(`📡 ${n} серверов`, 'ok');
+                            }
+                        } else {
+                            await send(cid, '👋 обнови / проверь');
+                        }
+                    }
+                }
+            } catch (e) {
+                document.getElementById('badge').textContent = '🔴 Офлайн';
+                document.getElementById('badge').style.background = '#ef4444';
+            }
+        }
+
+        log('🤖 Бот запущен', 'ok');
+        setInterval(tick, 2000);
+        tick();
+    </script>
+</body>
+</html>

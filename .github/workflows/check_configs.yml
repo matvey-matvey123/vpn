@@ -1,0 +1,52 @@
+name: Check Configs Real Proxy
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Каждый час (медленнее но качественнее)
+  workflow_dispatch:
+  push:
+    paths:
+      - 'working2.txt'
+
+jobs:
+  check-configs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30  # Больше времени на проверку
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests PySocks
+      continue-on-error: true
+        
+    - name: Run real proxy checker
+      run: python check_configs.py
+      continue-on-error: true
+        
+    - name: Commit results
+      run: |
+        if [ -f test.txt ]; then
+          git add test.txt test_stats.json 2>/dev/null || true
+          if ! git diff --staged --quiet; then
+            count=$(wc -l < test.txt)
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "✅ ${count} real working proxies [$(date +'%H:%M')]"
+            git push
+            echo "✅ Pushed ${count} proxies"
+          else
+            echo "ℹ️ No changes"
+          fi
+        fi
+      continue-on-error: true
