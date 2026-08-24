@@ -1,11 +1,6 @@
 # profile-title: yeavpn
 # ========== КАНАДА ==========
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.219:8080#🇳🇱 Нидерланды (владелец @matvey66652 админ @chat_jbpt)
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprMWRCT21PQjRvcWk3VW1wMzdhMWJR@82.38.31.219:8080#🇳🇱 Нидерланды
-ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpXU3lMNFhUd05zZHY=@108.181.121.226:8388#🇪🇸 Испания
-vless://d8a7b463-dc98-474d-a87e-8781476aef32@172.66.132.196:8880?type=ws&security=none&path=%2Fpyip%3DProxyIP.KR.CMLiussss.net&host=ancient-tree-7dc9.336-5f9.workers.dev&encryption=none#🇨🇦 Канада
-vless://23a9b46e-9443-4268-81c5-399929919ab0@155.103.69.195:48711?type=tcp&security=none&encryption=none&headerType=http&host=snapp.ir&path=%2F#🇺🇸 США
-
+vless://f294108f-8fe9-4422-9837-69212a8fb4ec@freeshka.i-love-russia.online:443?encryption=none&security=reality&sni=freeshka.i-love-russia.online&fp=firefox&pbk=Tm50a8xPW6cazNhgmTSHNbVfqaplvNSx0BQoJCGe3jU&sid=4aa753c327e7fd94&flow=xtls-rprx-vision&type=tcp&headerType=none#Нидерланды | 1
 # ========== РОССИЯ ==========
 vless://d566d849-ab28-4695-b01f-dcd284b67f5c@91.193.58.166:80?type=ws&security=none&path=%2Fpyip%3DTelegram%F0%9F%87%A8%F0%9F%87%B3%2B%40WangCai2&host=dry-frog-8793.454-dc4.workers.dev&encryption=none#🇷🇺 Россия (Домодедово)
 
